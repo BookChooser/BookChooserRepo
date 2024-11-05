@@ -19,9 +19,9 @@ def main():
         # Get the book as tokens.
         modified_line = re.sub(r',(?=\S)', '|', line)
 
-        book= modified_line.split('|')
+        book = modified_line.split('|')
 
-        isbn = book[6]
+        isbn = book[5]
         print(isbn)
 
 
