@@ -9,14 +9,19 @@ Steps needed for it to work:
 3. install isbnlib: in terminal type: pip install isbntools
 4. upgrade setuptools: in terminal type: pip install --upgrade setuptools
 """
-from isbnlib import meta, desc, cover
+from isbnlib import meta, desc, cover, isbn_from_words
 from isbnlib.registry import bibformatters
 
 SERVICE = "openl"
 
 # now you can use the service
-isbn = "9780553572988"
+isbn1 = "9780553572988"
 bibtex = bibformatters["bibtex"]
-print(bibtex(meta(isbn, SERVICE)))
-print("description: ", desc(isbn))
-print("cover: ", cover(isbn))
+print(bibtex(meta(isbn1, SERVICE)))
+print("description: ", desc(isbn1))
+print("cover: ", cover(isbn1),"\n")
+
+isbn2 = isbn_from_words("Working for Bigfoot")
+print(bibtex(meta(isbn2, SERVICE)))
+print("description: ", desc(isbn2))
+print("cover: ", cover(isbn2))
