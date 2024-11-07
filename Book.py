@@ -10,6 +10,10 @@ class Book:
         self.description = description
         self.cover_url = cover_url
 
-    def __init__(self):
-        self
 
+    def __str__(self):
+        return f"{self.title}, {self.author}, {self.isbn10}, {self.isbn13}, {self.year}, {self.page_count}, {self.description}, {self.cover_url}"
+"""
+TODO: 
+getters, setters for all attributes  
+"""

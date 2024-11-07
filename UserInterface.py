@@ -18,6 +18,7 @@ values = st.slider("Page Count", 0, 1000, (0,1000))
 st.write("Values:", values)
 st.button("START")
 
+
 class BookView:
     @staticmethod
     def display_books(books):
@@ -25,12 +26,3 @@ class BookView:
         for book in books:
             print(f"Title: {book.title}, Author: {book.author}, ISBN: {book.isbn}")
 
-
-class display_books:
-    pass
-
-class display_welcome_screen:
-    pass
-
-class display_winner_screen:
-    pass

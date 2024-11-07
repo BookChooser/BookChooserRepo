@@ -1,3 +1,6 @@
+"""
+class was integrated into BookController
+"""
 # This program reads test scores from a CSV file
 # and calculates each student's test average.
 from matplotlib import lines
@@ -10,7 +13,7 @@ SERVICE = "openl"
 
 def main():
     # Open the file.
-    csv_file = open('booklist.csv', 'r')
+    csv_file = open('resources/booklist.csv', 'r')
 
     # Read the file's lines into a list.
     lines = csv_file.readlines()
@@ -55,16 +58,6 @@ def main():
         else:
             # Fallback to author if both ISBN and ISBN-13 are missing.
             print(f"Author: {author}\n")
-
-
-
-
-
-
-
-
-
-
 
 
 
