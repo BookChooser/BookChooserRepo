@@ -1,5 +1,5 @@
 import re
-from isbnlib import meta, desc, cover, isbn_from_words
+from isbnlib import desc, cover, isbn_from_words
 from isbnlib.registry import bibformatters
 from Book import Book
 import UserInterface

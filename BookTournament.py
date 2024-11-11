@@ -100,6 +100,10 @@ if uploaded_file is not None:
             final_book_list.append(new_book)
             print("New book added: ", new_book.title, "\n")
 
+#cache the book list so it is remembered across all pages:
+#https://docs.streamlit.io/develop/api-reference/caching-and-state/st.session_state
+if "book_list" not in st.session_state:
+    st.session_state.book_list = final_book_list
 
 st.write("You have ", final_book_list.__len__(), " books on your to-read shelf, how many would you like to compare?")
 number_book_comparisons = st.number_input("Number of books to compare", min_value=2, max_value=None, value=2,

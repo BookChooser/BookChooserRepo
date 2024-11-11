@@ -13,6 +13,8 @@ class Book:
 
     def __str__(self):
         return f"{self.title}, {self.author}, {self.isbn10}, {self.isbn13}, {self.year}, {self.page_count}, {self.description}, {self.cover_url}"
+
+
 """
 TODO: 
 getters, setters for all attributes  
