@@ -25,6 +25,7 @@ temp_book_list = []
 final_book_list = []
 __description = None
 __cover_url = None
+default_thumbnail_url = "http://google.com" #TODO: change to actual default thumbnail
 
 st.title("Welcome to Book Chooser")
 st.write("To start, upload your Goodreads library below:")
@@ -44,14 +45,13 @@ if uploaded_file is not None:
         #print("Processing line: ", line)
 
         # Access the needed values from the columns
-        title = line[1]
-        author = line[2]
-        isbn10 = line[5]
-        isbn13 = re.sub(r',', '', line[6])
-        page_count = line[12]
-        # TODO: check if Original Publication Year is empty and if yes, look it up
-        year = line[13]
-        bookshelf = line[16]
+        title: str = line[1]
+        author: str = line[2]
+        isbn10: str = line[5]
+        isbn13: str = re.sub(r',', '', line[6])
+        page_count: str = line[11]
+        year: str = line[13]
+        bookshelf: str = line[16]
         #print(bookshelf)
         if bookshelf == "to-read":
             # Look up missing metadata using isbn and if not available, book title
@@ -90,10 +90,15 @@ if uploaded_file is not None:
                     __cover_url = cover(isbn13)
                 except Exception as e:
                     print(f"Error retrieving data for Title {title}: {e}\n")
+            #if year is empty, add default year
+            if len(year) == 0:
+                year = "Year published unavailable"
+            #if description is empty, add default text
             if len(__description) == 0:
-                __description = "No description available"
-            if len(__cover_url) == 0:
-                __cover_url == "Display default cover_url"
+                __description = "Description unavailable"
+            # if cover_url is empty, add default thumbnail
+            if not __cover_url.get("thumbnail"):
+                __cover_url["thumbnail"] = default_thumbnail_url
             # Create a new Book object and add it to book_list
             new_book = Book(title, author, isbn10, isbn13, year, page_count, __description,
                             __cover_url)
@@ -102,8 +107,7 @@ if uploaded_file is not None:
 
 #cache the book list so it is remembered across all pages:
 #https://docs.streamlit.io/develop/api-reference/caching-and-state/st.session_state
-if "book_list" not in st.session_state:
-    st.session_state.book_list = final_book_list
+st.session_state.book_list = final_book_list
 
 st.write("You have ", final_book_list.__len__(), " books on your to-read shelf, how many would you like to compare?")
 number_book_comparisons = st.number_input("Number of books to compare", min_value=2, max_value=None, value=2,
