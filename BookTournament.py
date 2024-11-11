@@ -1,5 +1,6 @@
 """
-class was integrated into BookController
+update 11 Nov 24: currently this class is most recent together with Book.py and pages in "pages" folder.
+Run by typing "streamlit run BookTournament.py" in terminal
 
 class getting some metadata, a description and cover incl thumbnail from OpenLibrary.org api
 (also possible to get from Google Books or Wikipedia apis)
