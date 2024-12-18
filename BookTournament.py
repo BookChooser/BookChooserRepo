@@ -18,6 +18,7 @@ import re
 from isbnlib import meta, desc, cover, isbn_from_words
 from isbnlib.registry import bibformatters
 from Book import Book
+import random
 import csv
 from io import StringIO
 
@@ -40,7 +41,7 @@ if uploaded_file is not None:
     st.write(dataframe)
 
     temp_book_list = dataframe.astype(str).values.tolist()
-    #print("booklist before formatting: ", temp_book_list)
+    # print("booklist before formatting: ", temp_book_list)
 
     for line in temp_book_list:
         #print("Processing line: ", line)
@@ -48,8 +49,8 @@ if uploaded_file is not None:
         # Access the needed values from the columns
         title: str = line[1]
         author: str = line[2]
-        isbn10: str = line[5]
-        isbn13: str = re.sub(r',', '', line[6])
+        isbn10: str = re.sub(r'[="]', '', line[5]) #removes equals and quotes signs
+        isbn13: str = re.sub(r'[="]', '', line[6]) #removes equals and quotes signs
         page_count: str = line[11]
         year: str = line[13]
         bookshelf: str = line[16]
@@ -106,21 +107,35 @@ if uploaded_file is not None:
             final_book_list.append(new_book)
             print("New book added: ", new_book.title, "\n")
 
-#cache the book list so it is remembered across all pages:
-#https://docs.streamlit.io/develop/api-reference/caching-and-state/st.session_state
-st.session_state.book_list = final_book_list
-
-st.write("You have ", final_book_list.__len__(), " books on your to-read shelf, how many would you like to compare?")
-number_book_comparisons = st.number_input("Number of books to compare", min_value=2, max_value=None, value=2,
-                                          step=1)
+#display the to-read list incl the looked up metadata
+#for development only. TODO: delete before submission to Rainer
 st.write("To-Read list:")
 dataframe_to_read = pd.DataFrame(final_book_list)
 st.write(dataframe_to_read)
+
+#cache the book list so it is remembered across all pages:
+#https://docs.streamlit.io/develop/api-reference/caching-and-state/st.session_state
+if "final_book_list" not in st.session_state:
+    st.session_state.final_book_list = final_book_list
+
+if "temp_book_list" not in st.session_state:
+    st.session_state.temp_book_list = temp_book_list
+
+#Creates a number input widget that allows the user to select a number between 2 and
+#the length of final_book_list, with a default value of 2 and a step size of 1.
+#The selected value is stored in the number_book_comparisons variable.
+st.write("You have ", final_book_list.__len__(), " books on your to-read shelf, how many would you like to compare?")
+number_book_comparisons = st.number_input("Number of books to compare", min_value=2, max_value=final_book_list.__len__(), value=2,
+                                          step=1)
 
 st.write("You want to compare", number_book_comparisons, "books")
 values = st.slider("Page Count", 0, 1000, (0, 1000))
 st.write("Values:", values)
 st.button("START")
+
+book_comparisons = random.sample(final_book_list, number_book_comparisons)
+if "book_comparisons" not in st.session_state:
+    st.session_state.book_comparisons = book_comparisons
 
 """
 Possibly the three screens will need to be added in three separate files?
