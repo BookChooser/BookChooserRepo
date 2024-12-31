@@ -160,13 +160,13 @@ else:
     #Creates a number input widget that allows the user to select a number between 2 and
     #the length of final_book_list, with a default value of 2 and a step size of 1.
     #The selected value is stored in the number_book_comparisons variable.
-    st.write("You have ", final_book_list.__len__(), " books on your to-read shelf, how many would you like to compare?")
-    number_book_comparisons = st.number_input("Number of books to compare", min_value=0, max_value=final_book_list.__len__(), value=final_book_list.__len__(),
+    st.write("You have ", st.session_state.final_book_list.__len__(), " books on your to-read shelf, how many would you like to compare?")
+    number_book_comparisons = st.number_input("Number of books to compare", min_value=0, max_value=st.session_state.final_book_list.__len__(), value=st.session_state.final_book_list.__len__(),
                                               step=1)
     st.write("You want to compare", number_book_comparisons, "books")
 
     #get max and min page count from final_book_list
-    page_counts = [book.page_count for book in final_book_list]
+    page_counts = [book.page_count for book in st.session_state.final_book_list]
 
     # Get the minimum and maximum page count
     min_page_count = min(page_counts)
@@ -179,7 +179,7 @@ else:
     #assign the tuple from values to min_selected and max_selected:
     min_selected, max_selected = values
 
-    filtered_books = [book for book in final_book_list if min_selected <= book.page_count <= max_selected]
+    filtered_books = [book for book in st.session_state.final_book_list if min_selected <= book.page_count <= max_selected]
 
     #check if the number of filtered books is smaller than the number of books we wanted to compare earlier
     filtered_books_length = len(filtered_books)
