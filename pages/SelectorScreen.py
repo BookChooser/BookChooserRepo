@@ -1,8 +1,22 @@
 import random
 import streamlit as st
 from st_clickable_images import clickable_images
+from streamlit import rerun
 
 from BookTournament import winner_screen
+
+# callback for buttons
+def book_clicked(book_to_remove):
+    st.session_state.book_remove = book_to_remove
+    print("Book to remove: " + book_to_remove.title)
+
+# remove book from list if set in session_state
+if "book_remove" in st.session_state:
+    st.session_state.book_comparisons.remove(st.session_state.book_remove)
+
+# stop if only one book is left and go to winner screen
+if len(st.session_state.book_comparisons) < 2:
+    st.switch_page(winner_screen)
 
 st.title("2 Books from Book List:")
 st.write("Welcome to the Selector Screen!")
@@ -18,11 +32,8 @@ with col1:
     st.header(book1.title)
     st.image(book1.cover_url['thumbnail'])
     #if this button is pressed, remove the other displayed book
-    if st.button(book1.title):
-        st.session_state.book_comparisons.remove(book2)
-        st.write("Removed book: ", book2.title)
-    # button_on_image(book1, "button1")
-    st.write("")
+    st.button(book1.title, args=[book2], on_click=book_clicked)
+
     st.write(f"**Author:** {book1.author}")
     st.write(f"**ISBN-10:** {book1.isbn10}")
     st.write(f"**ISBN-13:** {book1.isbn13}")
@@ -34,10 +45,8 @@ with col2:
     st.header(book2.title)
     st.image(book2.cover_url['thumbnail'])
     #if this button is pressed, remove the other displayed book
-    if st.button(book2.title):
-        st.session_state.book_comparisons.remove(book1)
-        st.write("Removed book: ", book1.title)
-    # button_on_image(book2, "button2")
+    st.button(book2.title, args=[book1], on_click=book_clicked)
+
     st.write("")
     st.write(f"**Author:** {book2.author}")
     st.write(f"**ISBN-10:** {book2.isbn10}")
@@ -47,12 +56,7 @@ with col2:
     st.write(f"**Description:** {book2.description}")
 
 
-if len(st.session_state.book_comparisons) < 2:
-    st.switch_page(winner_screen)
-else:
-    # TODO: delete for loop once no longer needed
-    for book in st.session_state.book_comparisons:
-        st.write(book.title)
+
 
 # implement logic to remove 1 book from book_comparisons before uncommenting this line
 # while len(st.session_state.book_comparisons) > 1:
