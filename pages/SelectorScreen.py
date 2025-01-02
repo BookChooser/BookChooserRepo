@@ -34,22 +34,22 @@ with col1:
 
     # Check if the title contains brackets and extract the substring
     # e.g. "Flames of Chaos (Legacy of the Nine Realms, #1)"
-    if '(' in book1_title and ')' in book1_title:
-        book1_title_only = book1_title.split('(')[0].strip()
-        series1 = book1_title.split('(')[1].split(')')[0].strip()
-    else:
-        book1_title_only = book1_title
-        series1 = "Not Applicable"
+    # if '(' in book1_title and ')' in book1_title:
+    #     book1_title_only = book1_title.split('(')[0].strip()
+    #     series1 = book1_title.split('(')[1].split(')')[0].strip()
+    # else:
+    #     book1_title_only = book1_title
+    #     series1 = "Not Applicable"
 
     #if this button is pressed, remove the other displayed book
-    st.button(book1_title_only, args=[book2], on_click=book_clicked)
+    st.button(book1.title, args=[book2], on_click=book_clicked)
 
     #display the book
-    st.header(book1_title_only)
+    st.header(book1.title)
     st.image(book1.cover_url['thumbnail'], width=200)
     st.write("")
     st.write(f"**Author:** {book1.author}")
-    st.write(f"**Series:** {series1}")
+    st.write(f"**Series:** {book1.series}")
     st.write(f"**Year Published:** {book1.year}")
     st.write(f"**Page Count:** {book1.page_count}")
     st.write(f"**Description:** {book1.description}")
@@ -60,22 +60,22 @@ with col2:
 
     # Check if the title contains brackets and extract the substring
     # e.g. "Flames of Chaos (Legacy of the Nine Realms, #1)"
-    if '(' in book2_title and ')' in book2_title:
-        book2_title_only = book2_title.split('(')[0].strip()
-        series2 = book2_title.split('(')[1].split(')')[0].strip()
-    else:
-        book2_title_only = book2_title
-        series2 = "Not Applicable"
+    # if '(' in book2_title and ')' in book2_title:
+    #     book2_title_only = book2_title.split('(')[0].strip()
+    #     series2 = book2_title.split('(')[1].split(')')[0].strip()
+    # else:
+    #     book2_title_only = book2_title
+    #     series2 = "Not Applicable"
 
     #if this button is pressed, remove the other displayed book
-    st.button(book2_title_only, args=[book1], on_click=book_clicked)
+    st.button(book2.title, args=[book1], on_click=book_clicked)
 
     # display the book
-    st.header(book2_title_only)
+    st.header(book2.title)
     st.image(book2.cover_url['thumbnail'], width=200)
     st.write("")
     st.write(f"**Author:** {book2.author}")
-    st.write(f"**Series:** {series2}")
+    st.write(f"**Series:** {book2.series}")
     st.write(f"**Year Published:** {book2.year}")
     st.write(f"**Page Count:** {book2.page_count}")
     st.write(f"**Description:** {book2.description}")
