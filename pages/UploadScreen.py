@@ -42,7 +42,7 @@ else:
 
 
 # Main screen
-st.title("Welcome to Book Chooser")
+st.title("Welcome to Book Chooser.")
 
 st.session_state.uploaded_file = st.file_uploader("To start, upload your Goodreads library here:", type="csv")
 
