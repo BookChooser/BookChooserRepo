@@ -4,6 +4,8 @@ from st_clickable_images import clickable_images
 from streamlit import rerun
 
 from BookTournament import winner_screen
+from Style import load_css
+
 
 # callback for buttons
 def book_clicked(book_to_remove):
@@ -18,8 +20,9 @@ if "book_remove" in st.session_state:
 if len(st.session_state.book_comparisons) < 2:
     st.switch_page(winner_screen)
 
-st.title("Welcome to the Selector Screen!")
-st.write("Which book would you like to read more?")
+load_css()
+st.markdown("<h1 style='text-align: center;', class='title'>Time to make a decision!</h1>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center;', class='subheading1'>Which book would you like to read more?</h3>", unsafe_allow_html=True)
 
 # Create two columns to display the books side by side
 col1, col2 = st.columns(2)
@@ -41,12 +44,14 @@ with col1:
     #     book1_title_only = book1_title
     #     series1 = "Not Applicable"
 
-    #if this button is pressed, remove the other displayed book
-    st.button(book1.title, args=[book2], on_click=book_clicked)
-
-    #display the book
-    st.header(book1.title)
+    #display the book title and cover
+    st.header(book1.title, anchor=False)
     st.image(book1.cover_url['thumbnail'], width=200)
+
+    # if this button is pressed, remove the other displayed book
+    st.button(book1.title, args=[book2], on_click=book_clicked, type="primary")
+
+    #display additional book information
     st.write("")
     st.write(f"**Author:** {book1.author}")
     st.write(f"**Series:** {book1.series}")
@@ -67,12 +72,14 @@ with col2:
     #     book2_title_only = book2_title
     #     series2 = "Not Applicable"
 
-    #if this button is pressed, remove the other displayed book
-    st.button(book2.title, args=[book1], on_click=book_clicked)
-
-    # display the book
-    st.header(book2.title)
+    # display the book title and cover
+    st.header(book2.title, anchor=False)
     st.image(book2.cover_url['thumbnail'], width=200)
+
+    #if this button is pressed, remove the other displayed book
+    st.button(book2.title, args=[book1], on_click=book_clicked, type="primary")
+
+    #display additional book information
     st.write("")
     st.write(f"**Author:** {book2.author}")
     st.write(f"**Series:** {book2.series}")

@@ -24,6 +24,7 @@ from Book import Book
 import random
 
 from BookTournament import selector_screen
+from Style import load_css
 
 # instance variables
 final_book_list = []
@@ -42,7 +43,8 @@ else:
 
 
 # Main screen
-st.title("Welcome to Book Chooser")
+load_css()
+st.markdown("<h1 style='text-align: center;', class='title'>Welcome to the Book Tournament!</h1>", unsafe_allow_html=True)
 
 st.session_state.uploaded_file = st.file_uploader("To start, upload your Goodreads library here:", type="csv")
 
@@ -148,9 +150,10 @@ if st.session_state.uploaded_file is not None:
         book_comparisons = random.sample(filtered_books, number_book_comparisons)
 
 
-        if st.button("START"):
+        if st.button("START",type="primary"):
             # caches the randomly selected books
             st.session_state.book_comparisons = book_comparisons
+            #initialize progress bar with message to user
             progress_text = "Looking up metadata and preparing the tournament for you"
             progress_bar = st.progress(0, text=progress_text)
             processed_books = 0
@@ -205,6 +208,7 @@ if st.session_state.uploaded_file is not None:
                 # Create a new Book object and add it to book_list
                 book.description = __description
                 book.cover_url = __cover_url
+                #update the progress bar
                 processed_books += 1
                 progress = processed_books / number_book_comparisons
                 progress_bar.progress(progress, text=progress_text)
