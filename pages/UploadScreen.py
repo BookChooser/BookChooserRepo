@@ -139,7 +139,9 @@ if st.session_state.uploaded_file is not None:
         if st.button("START"):
             # caches the randomly selected books
             st.session_state.book_comparisons = book_comparisons
-
+            progress_text = "Looking up metadata and preparing the tournament for you"
+            progress_bar = st.progress(0, text=progress_text)
+            processed_books = 0
             for book in st.session_state.book_comparisons:
                 # Look up missing metadata using isbn and if not available, book title
                 if len(book.isbn10) and len(book.isbn13) > 4:
@@ -191,4 +193,7 @@ if st.session_state.uploaded_file is not None:
                 # Create a new Book object and add it to book_list
                 book.description = __description
                 book.cover_url = __cover_url
+                processed_books += 1
+                progress = processed_books / number_book_comparisons
+                progress_bar.progress(progress, text=progress_text)
             st.switch_page(selector_screen)
