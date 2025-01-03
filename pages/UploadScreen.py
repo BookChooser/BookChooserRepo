@@ -12,6 +12,8 @@ Steps needed for it to work:
 3. install isbnlib: in terminal type: pip install isbntools
 4. upgrade setuptools: in terminal type: pip install --upgrade setuptools
 """
+import threading
+
 import streamlit as st
 import csv
 import pandas as pd
@@ -28,6 +30,16 @@ final_book_list = []
 __description = None
 __cover_url = None
 default_thumbnail_url = "https://publications.iarc.fr/uploads/media/default/0001/02/thumb_1291_default_publication.jpeg"
+
+# Ensure the components are only rendered once
+if "currentThread" not in st.session_state:
+    st.session_state.currentThread = threading.current_thread().ident
+else:
+    #print("Session Thread value:" + str(st.session_state.currentThread) + " Current Thread value" + str(threading.current_thread().ident))
+    if st.session_state.currentThread == threading.current_thread().ident:
+        #print("Quiting!")
+        quit()
+
 
 # Main screen
 st.title("Welcome to Book Chooser")
