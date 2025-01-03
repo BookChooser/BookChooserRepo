@@ -1,26 +1,30 @@
 import streamlit as st
 
 from BookTournament import upload_screen
+from Style import load_css
 
-st.markdown("""
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
+#st.markdown("""
+#<style>
+#@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
 
-.title{
-    font-family: 'Italiana', serif;
-    font-size: 72px;
-}
+#.title{
+#    font-family: 'Italiana', serif;
+#    font-size: 72px;
+#}
 
-</style>
-""", unsafe_allow_html=True)
+#</style>
+#""", unsafe_allow_html=True)
 
+load_css()
 st.markdown("<h1 style='text-align: center;', class='title'>The winner is:</h1>", unsafe_allow_html=True)
 
-col1, col2 = st.columns(2, vertical_alignment="center")
+
+col1, col2 = st.columns(2, vertical_alignment="top")
 
 for book in st.session_state.book_comparisons:
 
     with col1:
+        st.write("")
         st.image(book.cover_url['thumbnail'], width=200)
     with col2:
         st.header(book.title, anchor=False)
