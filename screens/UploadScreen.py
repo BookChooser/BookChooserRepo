@@ -68,6 +68,7 @@ if st.session_state.uploaded_file is not None:
                 if bookshelf == "to-read":
                     new_book = Book(title, series, author, isbn10, isbn13, year, page_count, '', '')
                     final_book_list.append(new_book)
+                    print(new_book) #TODO: remove
 
             except IndexError as e:
                 st.error(f"Error processing line: {line}. Index out of range: {e}")
