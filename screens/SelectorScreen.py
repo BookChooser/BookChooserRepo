@@ -1,16 +1,11 @@
 import random
 import streamlit as st
-from st_clickable_images import clickable_images
-from streamlit import rerun
-
 from BookTournament import winner_screen
 from Style import load_css
-
 
 # callback for buttons
 def book_clicked(book_to_remove):
     st.session_state.book_remove = book_to_remove
-    print("Book to remove: " + book_to_remove.title)
 
 # remove book from list if set in session_state
 if "book_remove" in st.session_state:
@@ -35,15 +30,6 @@ with col1:
     # get the full title of the book and store it in a string variable
     book1_title = book1.title
 
-    # Check if the title contains brackets and extract the substring
-    # e.g. "Flames of Chaos (Legacy of the Nine Realms, #1)"
-    # if '(' in book1_title and ')' in book1_title:
-    #     book1_title_only = book1_title.split('(')[0].strip()
-    #     series1 = book1_title.split('(')[1].split(')')[0].strip()
-    # else:
-    #     book1_title_only = book1_title
-    #     series1 = "Not Applicable"
-
     #display the book title and cover
     st.header(book1.title, anchor=False)
     st.image(book1.cover_url['thumbnail'], width=200)
@@ -62,15 +48,6 @@ with col1:
 with col2:
     # get the full title of the book and store it in a string variable
     book2_title = book2.title
-
-    # Check if the title contains brackets and extract the substring
-    # e.g. "Flames of Chaos (Legacy of the Nine Realms, #1)"
-    # if '(' in book2_title and ')' in book2_title:
-    #     book2_title_only = book2_title.split('(')[0].strip()
-    #     series2 = book2_title.split('(')[1].split(')')[0].strip()
-    # else:
-    #     book2_title_only = book2_title
-    #     series2 = "Not Applicable"
 
     # display the book title and cover
     st.header(book2.title, anchor=False)
