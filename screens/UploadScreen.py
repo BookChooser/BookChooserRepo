@@ -160,9 +160,11 @@ if st.session_state.uploaded_file is not None:
                 if len(book.year) == 0:
                     year = "Unavailable"
                 # if description is empty, add default text
-                if len(__description) == 0:
+                if __description is None:
                     __description = "Unavailable"
                 # if cover_url is empty, add default thumbnail
+                if __cover_url is None:
+                    __cover_url = {}
                 if not __cover_url.get("thumbnail"):
                     __cover_url["thumbnail"] = default_thumbnail_url
 
