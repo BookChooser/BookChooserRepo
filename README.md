@@ -6,9 +6,11 @@ until only one book is left and the winner is found.
 The app displays metadata from the Goodreads Library and from isbnlib to support the user's decision.
 
 ## Download Goodreads Library
+For testing purposes, a goodreads export is included in the resources folder.
+For users with an active Goodreads account and books on their to-read shelf:
 1. Go to https://www.goodreads.com/review/import and log in
-4. Select 'Export Library', and click the download link once available
-5. Run the BookTournament app and upload the exported library
+2. Select 'Export Library', and click the download link once available
+3. Run the BookTournament app and upload the exported library
 
 ## Steps needed to run the app locally
 1. Install pip: py -m ensurepip --upgrade
