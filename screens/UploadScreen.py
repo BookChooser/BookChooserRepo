@@ -15,11 +15,11 @@ __cover_url = None
 default_thumbnail_url = "https://publications.iarc.fr/uploads/media/default/0001/02/thumb_1291_default_publication.jpeg"
 
 # Ensure the components are only rendered once
-if "currentThread" not in st.session_state:
-    st.session_state.currentThread = threading.current_thread().ident
-else:
-    if st.session_state.currentThread == threading.current_thread().ident:
-        quit()
+#if "currentThread" not in st.session_state:
+#    st.session_state.currentThread = threading.current_thread().ident
+#else:
+#    if st.session_state.currentThread == threading.current_thread().ident:
+#        quit()
 
 # Main screen
 load_css()
