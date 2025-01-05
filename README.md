@@ -1,13 +1,14 @@
 # BookTournament Project
 
-An app that helps the user choose their next book from an exported Goodreads list. 
+An app that helps the user choose their next book from an exported Goodreads list 
+by getting a description and cover incl thumbnail from isbnlib.
 
-Run by typing "streamlit run BookTournament.py" in terminal
-class getting some metadata, a description and cover incl thumbnail from isbnlib
-Important: input ISBN13 (not ISBN10)
+Steps needed:
+1. install pip: py -m ensurepip --upgrade
+2. install isbnlib: pip install isbntools
+3. upgrade setuptools: pip install --upgrade setuptools
+4. install streamlit: pip install streamlit
 
-Steps needed for it to work:
-1. add a local virtual environment for the project
-2. install pip: right-click project, open in Terminal. In terminal type:  py -m ensurepip --upgrade
-3. install isbnlib: in terminal type: pip install isbntools
-4. upgrade setuptools: in terminal type: pip install --upgrade setuptools
+Run locally by typing "streamlit run BookTournament.py" in terminal
+Run deployed app at https://huggingface.co/spaces/Alex-02/book-tournament
+
